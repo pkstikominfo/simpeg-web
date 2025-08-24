@@ -1,0 +1,28 @@
+.elementWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  margin-bottom: 20px;
+  /* width: 100%; */
+}
+
+.searchForm {
+  display: flex;
+  align-items: center;
+  min-width: 250px;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #0070f3;
+  box-shadow: 0 0 0 3px rgba(0, 118, 255, 0.2);
+}

@@ -1,9 +1,6 @@
-import styles from "./page.module.css";
+// import styles from "./page.module.css";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return (
-    <main className={styles.main}>
-      <h1>Welcome to My Apps</h1>
-    </main>
-  );
+  return redirect("/master/dashboard");
 }

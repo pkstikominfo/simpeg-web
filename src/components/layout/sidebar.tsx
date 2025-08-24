@@ -12,7 +12,7 @@ type MenuItem = {
 };
 
 const menuItems: MenuItem[] = [
-  { title: "Dashboard", href: "/" },
+  { title: "Dashboard", href: "/master/dashboard" },
   {
     title: "Master Data",
     children: [
@@ -23,17 +23,20 @@ const menuItems: MenuItem[] = [
       { title: "Golongan", href: "/master/golongan" },
     ],
   },
-  { title: "Riwayat Jabatan", href: "/riwayat-jabatan" },
-  { title: "Riwayat Subunit", href: "/riwayat-subunit" },
+  { title: "Riwayat Jabatan", href: "/master/riwayat-jabatan" },
+  { title: "Riwayat Subunit", href: "/master/riwayat-subunit" },
 ];
 
-export default function Sidebar() {
+export default function Sidebar({ isOpen }: { isOpen: boolean }) {
   const pathname = usePathname();
   const [open, setOpen] = useState<string | null>(null);
 
   return (
-    <aside className="sidebar">
-      <h1>SIMPEG</h1>
+    <aside
+      className="sidebar"
+      style={{ width: isOpen ? "240px" : "0px", overflow: "hidden" }}
+    >
+      <h1>SIMPEG BOLTARA</h1>
       <nav>
         {menuItems.map((item) => (
           <div key={item.title}>
@@ -43,11 +46,20 @@ export default function Sidebar() {
                   onClick={() =>
                     setOpen(open === item.title ? null : item.title)
                   }
+                  className={`menuButton ${
+                    open === item.title ? "expanded" : ""
+                  }`}
+                  aria-expanded={open === item.title}
+                  aria-controls={`submenu-${item.title}`}
                 >
                   {item.title}
                 </button>
-                {open === item.title && (
-                  <div className="submenu">
+
+                <div
+                  id={`submenu-${item.title}`}
+                  className={`submenu ${open === item.title ? "open" : ""}`}
+                >
+                  <div className="submenuInner">
                     {item.children.map((child) => {
                       const active = pathname === child.href;
                       return (
@@ -61,7 +73,7 @@ export default function Sidebar() {
                       );
                     })}
                   </div>
-                )}
+                </div>
               </>
             ) : (
               <Link

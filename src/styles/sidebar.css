@@ -1,16 +1,18 @@
-/* --- Sidebar Container --- */
+/* ====== FRAME SIDEBAR ====== */
 .sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
-  width: 240px; /* fixed width */
+  width: 240px;
   min-height: 100vh;
-  background: #111827; /* dark sidebar */
+  background: #111827;
   color: #f3f4f6;
   border-right: 1px solid #1f2937;
   box-sizing: border-box;
 }
 
-/* --- Header --- */
 .sidebar h1 {
   font-weight: bold;
   font-size: 1.2rem;
@@ -19,7 +21,6 @@
   border-bottom: 1px solid #1f2937;
 }
 
-/* --- Nav Container --- */
 .sidebar nav {
   flex: 1;
   display: flex;
@@ -28,13 +29,12 @@
   box-sizing: border-box;
 }
 
-/* --- Nav Items (Link / Button) --- */
+/* ====== ITEM UMUM ====== */
 .sidebar a,
 .sidebar button {
   display: block;
-  padding: 0.6rem 1rem;
-  margin: 0 0.5rem;
-  border-radius: 6px;
+  padding: 0.8rem 1.5rem;
+  margin: 0;
   color: #d1d5db;
   font-size: 0.95rem;
   text-decoration: none;
@@ -42,9 +42,9 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.25s ease, color 0.2s ease;
   box-sizing: border-box;
-  width: calc(100% - 1rem); /* biar gak melewati border sidebar */
+  width: 100%;
 }
 
 .sidebar a:hover,
@@ -53,23 +53,60 @@
   color: #fff;
 }
 
-/* --- Active State --- */
 .sidebar a.active {
   background: #374151;
   font-weight: 600;
   color: #fff;
 }
 
-/* --- Submenu --- */
-.sidebar .submenu {
+/* ====== TOMBOL MENU UTAMA + CHEVRON ====== */
+.menuButton {
   display: flex;
-  flex-direction: column;
-  margin: 0.25rem 0 0.5rem 1rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 
-.sidebar .submenu a {
-  font-size: 0.85rem;
-  padding: 0.4rem 0.75rem;
-  margin: 0.2rem 0.5rem;
-  width: calc(100% - 1rem);
+.menuButton .chev {
+  transition: transform 0.2s ease;
+}
+
+.menuButton.expanded .chev {
+  transform: rotate(180deg);
+}
+
+/* ====== SUBMENU SLIDE (GRID TRICK) ====== */
+/* Penting: JANGAN pakai display:none/flex di sini.
+   Biarkan selalu ada, lalu animasikan tinggi via grid rows. */
+.submenu {
+  display: grid;
+  grid-template-rows: 0fr; /* tertutup */
+  transition: grid-template-rows 300ms ease, opacity 200ms ease;
+  opacity: 0; /* pudar saat tertutup */
+  margin: 0; /* rapat saat tertutup */
+}
+
+.submenu.open {
+  grid-template-rows: 1fr; /* terbuka */
+  opacity: 1;
+  margin: 0.25rem 0 0.5rem 0rem; /* beri jarak saat terbuka */
+}
+
+/* Wrapper agar konten tidak bocor saat 0fr */
+.submenuInner {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Item submenu */
+.submenu a {
+  font-size: 0.9rem;
+  padding: 0.6rem 0.75rem 0.6rem 2.75rem;
+  color: #cbd5e1;
+}
+
+.submenu a:hover {
+  background: rgba(56, 64, 77, 0.445);
+  color: #fff;
 }

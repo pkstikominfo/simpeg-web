@@ -5,8 +5,12 @@ body {
   padding: 0;
   height: 100%;
   font-family: sans-serif;
-  background-color: #dedede;
+  background-color: #f3f4f5 !important;
   color: #000000;
+}
+
+main {
+  padding: 20px;
 }
 
 a {

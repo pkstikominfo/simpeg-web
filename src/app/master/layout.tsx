@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "../globals.css";
+import Layouts from "@/components/layout/layouts";
 
 export const metadata: Metadata = {
   title: "My App",
@@ -11,9 +12,5 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  );
+  return <Layouts>{children}</Layouts>;
 }
