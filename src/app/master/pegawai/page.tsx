@@ -20,7 +20,7 @@ const columns: Column<Pegawai>[] = [
 export default function PegawaiPage() {
   const { data, loading } = usePegawai();
   const [keyword, setKeyword] = useState("");
-
+  
   const handleSearch = (text: string) => {
     setKeyword(text);
     // sementara filter dummy data, nanti ganti ke API GET /pegawai-by-keyword

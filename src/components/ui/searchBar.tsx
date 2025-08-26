@@ -21,7 +21,7 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
       <div className={styles.searchForm}>
         <input
           type="text"
-          placeholder="Cari pegawai..."
+          placeholder="Cari..."
           value={keyword}
           onChange={handleChange}
           className={styles.searchInput}

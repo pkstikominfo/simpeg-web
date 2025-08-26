@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Pegawai } from "@/types/pegawai";
-import { fetcher } from "@/lib/api";
+// import { fetcher } from "@/lib/api";
 
 export function usePegawai() {
   const [data, setData] = useState<Pegawai[]>([]);
