@@ -33,8 +33,11 @@ export default function Sidebar({ isOpen }: { isOpen: boolean }) {
 
   return (
     <aside
-      className="sidebar"
-      style={{ width: isOpen ? "240px" : "0px", overflow: "hidden" }}
+      className="sidebar z-10"
+      style={{
+        width: isOpen ? "240px" : "0px",
+        overflow: "hidden",
+      }}
     >
       <h1>SIMPEG BOLTARA</h1>
       <nav>

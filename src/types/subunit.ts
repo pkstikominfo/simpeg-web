@@ -5,7 +5,7 @@ export interface ApiResponse<T = undefined> {
 }
 
 export interface Subunit {
-  kode_subunit: string;
+  kode_sub_unit: string;
   kode_unit: string;
-  nama_subunit: string;
+  nama_sub_unit: string;
 }

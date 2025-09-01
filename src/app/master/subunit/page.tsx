@@ -1,36 +1,38 @@
 "use client";
 
-import { useState } from "react";
-import { useSubunit } from "@/hooks/useSubunit";
 import { Subunit } from "@/types/subunit";
 import { Column } from "@/types/table";
 import Table from "@/components/ui/table";
 import styles from "@/styles/pegawai.module.css";
-import SearchBar from "@/components/ui/searchBar";
+import { useApiData } from "@/hooks/useApiData";
+import { SpinnerData } from "@/components/common/spinner";
 
 const columns: Column<Subunit>[] = [
-  { key: "nama_subunit", label: "NAMA SUBUNIT" },
+  { key: "kode_unit", label: "KODE UNIT" },
+  { key: "kode_sub_unit", label: "KODE SUBUNIT" },
+  { key: "nama_sub_unit", label: "NAMA SUBUNIT" },
 ];
 
 export default function SubunitPage() {
-  const { data, loading } = useSubunit();
-  const [keyword, setKeyword] = useState("");
-
-  const handleSearch = (text: string) => {
-    setKeyword(text);
-    // sementara filter dummy data, nanti ganti ke API GET /pegawai-by-keyword
-    console.log("Cari:", text);
-  };
-
-  if (loading) return <p>Loading...</p>;
+  const { data: subunit, loading, error } = useApiData<Subunit>("/sub-unit");
 
   return (
     <div className={styles.container}>
       <h2 className={styles.header}>Data Subunit</h2>
       <p className={styles.subheader}>Berikut adalah daftar data subunit</p>
-
-      <SearchBar onSearch={handleSearch} />
-      <Table columns={columns} data={data} />
+      <div className={styles.tableContainer}>
+        <div
+          className={loading ? styles.tableWrapperLoading : styles.tableWrapper}
+        >
+          {loading ? (
+            <SpinnerData />
+          ) : error ? (
+            <p>Error: {error.message}</p>
+          ) : (
+            <Table columns={columns} data={subunit} />
+          )}
+        </div>
+      </div>
     </div>
   );
 }

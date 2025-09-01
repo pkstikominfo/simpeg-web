@@ -42,30 +42,33 @@
 }
 
 .dropdown-btn:hover {
-  background: #374151;
+  background: #37415179;
 }
 
 .dropdown-menu {
   position: absolute;
   right: 0;
   top: 2.8rem;
-  background: #374151;
-  border: 1px solid #4b5563;
+  background: #ffffff;
+  border: 2px solid #d1d5db;
   border-radius: 0.5rem;
-  min-width: 140px;
+  width: 115px;
   overflow: hidden;
+  font-weight: bold;
 }
 
 .dropdown-item {
   display: block;
-  padding: 0.6rem 1rem;
-  color: #d1d5db;
+  padding: 0.9rem 1.5rem;
+  color: #000000;
   text-decoration: none;
+  font-weight: 600;
   transition: background 0.2s;
+  background: rgb(255, 255, 255);
 }
 
 .dropdown-item:hover {
-  background: #4b5563;
+  background: #5c626bbe;
   color: #fff;
 }
 
@@ -82,5 +85,5 @@
 }
 
 .toggle-sidebar-btn:hover {
-  background: #374151;
+  background: #37415179;
 }

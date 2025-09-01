@@ -1,4 +1,3 @@
-/* ====== FRAME SIDEBAR ====== */
 .sidebar {
   position: fixed;
   top: 0;
@@ -11,6 +10,9 @@
   color: #f3f4f6;
   border-right: 1px solid #1f2937;
   box-sizing: border-box;
+  height: 100%;
+  transition: width 0.3s ease;
+  z-index: 20;
 }
 
 .sidebar h1 {
@@ -29,7 +31,6 @@
   box-sizing: border-box;
 }
 
-/* ====== ITEM UMUM ====== */
 .sidebar a,
 .sidebar button {
   display: block;
@@ -59,7 +60,6 @@
   color: #fff;
 }
 
-/* ====== TOMBOL MENU UTAMA + CHEVRON ====== */
 .menuButton {
   display: flex;
   align-items: center;
@@ -75,31 +75,26 @@
   transform: rotate(180deg);
 }
 
-/* ====== SUBMENU SLIDE (GRID TRICK) ====== */
-/* Penting: JANGAN pakai display:none/flex di sini.
-   Biarkan selalu ada, lalu animasikan tinggi via grid rows. */
 .submenu {
   display: grid;
-  grid-template-rows: 0fr; /* tertutup */
+  grid-template-rows: 0fr;
   transition: grid-template-rows 300ms ease, opacity 200ms ease;
-  opacity: 0; /* pudar saat tertutup */
-  margin: 0; /* rapat saat tertutup */
+  opacity: 0;
+  margin: 0;
 }
 
 .submenu.open {
-  grid-template-rows: 1fr; /* terbuka */
+  grid-template-rows: 1fr;
   opacity: 1;
-  margin: 0.25rem 0 0.5rem 0rem; /* beri jarak saat terbuka */
+  margin: 0.25rem 0 0.5rem 0rem;
 }
 
-/* Wrapper agar konten tidak bocor saat 0fr */
 .submenuInner {
   overflow: hidden;
   display: flex;
   flex-direction: column;
 }
 
-/* Item submenu */
 .submenu a {
   font-size: 0.9rem;
   padding: 0.6rem 0.75rem 0.6rem 2.75rem;

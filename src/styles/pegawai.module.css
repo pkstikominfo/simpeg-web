@@ -78,3 +78,31 @@
 .buttonDelete:hover {
   background-color: #c53030;
 }
+
+.tableContainer {
+  margin-bottom: 13px;
+  background: #f6f6f6;
+  box-shadow: inset 1px 2px 2px #00000014;
+  border-radius: 16px;
+  padding: 13px;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  overflow-y: auto;
+  border-radius: 10px;
+  max-height: 400px;
+  scrollbar-color: #e9edf1 transparent;
+  background-color: white;
+  min-height: 12.5rem;
+}
+
+.tableWrapperLoading {
+  overflow-x: auto;
+  overflow-y: auto;
+  border-radius: 10px;
+  max-height: 400px;
+  scrollbar-color: #e9edf1 transparent;
+  background-color: white;
+  height: 12.5rem;
+}

@@ -1,30 +1,21 @@
 "use client";
 
-import { useState } from "react";
-import styles from "@/styles/searchbar.module.css";
+type SearchInputProps = {
+  value: string;
+  onChange: (value: string) => void;
+};
 
-interface SearchBarProps {
-  onSearch: (keyword: string) => void;
-}
-
-export default function SearchBar({ onSearch }: SearchBarProps) {
-  const [keyword, setKeyword] = useState("");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setKeyword(value);
-    onSearch(value); // langsung trigger ke parent
-  };
-
+export function SearchBar({ value, onChange }: SearchInputProps) {
   return (
-    <div className={styles.elementWrapper}>
-      <div className={styles.searchForm}>
+    <div className="flex items-center justify-start md:justify-between mb-4">
+      <div></div>
+      <div className="w-[18rem]">
         <input
           type="text"
-          placeholder="Cari..."
-          value={keyword}
-          onChange={handleChange}
-          className={styles.searchInput}
+          placeholder="Cari berdasarkan nama"
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          className="border p-2 rounded w-full"
         />
       </div>
     </div>

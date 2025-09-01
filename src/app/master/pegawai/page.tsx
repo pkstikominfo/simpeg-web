@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
-import { usePegawai } from "@/hooks/usePegawai";
 import { Pegawai } from "@/types/pegawai";
 import { Column } from "@/types/table";
 import Table from "@/components/ui/table";
 import styles from "@/styles/pegawai.module.css";
-import SearchBar from "@/components/ui/searchBar";
+import { SearchBar } from "@/components/ui/searchBar";
+import { useApiData } from "@/hooks/useApiData";
+import { SpinnerData } from "@/components/common/spinner";
+import { useSearchData } from "@/hooks/useSearchData";
+import EmptyCard from "@/components/common/emptyData";
 
 const columns: Column<Pegawai>[] = [
   { key: "nip", label: "NIP" },
@@ -18,24 +20,47 @@ const columns: Column<Pegawai>[] = [
 ];
 
 export default function PegawaiPage() {
-  const { data, loading } = usePegawai();
-  const [keyword, setKeyword] = useState("");
-  
-  const handleSearch = (text: string) => {
-    setKeyword(text);
-    // sementara filter dummy data, nanti ganti ke API GET /pegawai-by-keyword
-    console.log("Cari:", text);
-  };
+  const {
+    data: pegawai,
+    loading: loadingPegawai,
+    error: errorPegawai,
+  } = useApiData<Pegawai>("/pegawai");
 
-  if (loading) return <p>Loading...</p>;
+  const {
+    query,
+    setQuery,
+    results: hasilSearch,
+    loading: loadingSearch,
+    error: errorSearch,
+  } = useSearchData<Pegawai>("/pegawai-by-keyword");
+
+  const displayData = query.trim() ? hasilSearch : pegawai;
+
+  const isLoading = loadingPegawai || loadingSearch;
+  const errorMessage = errorPegawai?.message || errorSearch || null;
 
   return (
     <div className={styles.container}>
       <h2 className={styles.header}>Data Pegawai</h2>
       <p className={styles.subheader}>Berikut adalah daftar data pegawai</p>
-
-      <SearchBar onSearch={handleSearch} />
-      <Table columns={columns} data={data} />
+      <SearchBar value={query} onChange={setQuery} />
+      <div className={styles.tableContainer}>
+        <div
+          className={
+            isLoading ? styles.tableWrapperLoading : styles.tableWrapper
+          }
+        >
+          {isLoading ? (
+            <SpinnerData />
+          ) : errorMessage ? (
+            <p className="text-red-500">Error: {errorMessage}</p>
+          ) : displayData?.length === 0 ? (
+            <EmptyCard />
+          ) : (
+            <Table columns={columns} data={displayData} />
+          )}
+        </div>
+      </div>
     </div>
   );
 }
