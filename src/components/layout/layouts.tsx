@@ -20,9 +20,11 @@ export default function Layouts({ children }: { children: React.ReactNode }) {
         ></div>
       )}
       <div
-        className={`lg:${isSidebarOpen ? "ml-[240px]" : "ml-0"} md:${
-          isSidebarOpen ? "ml-[240px]" : "ml-0"
-        } sm:${isSidebarOpen ? "ml-[240px]" : "ml-0"}`}
+        className={`transition-all duration-300 ${
+          isSidebarOpen
+            ? "sm:ml-[240px] md:ml-[240px] lg:ml-[240px]"
+            : "sm:ml-0 md:ml-0 lg:ml-0"
+        }`}
         style={{
           display: "flex",
           flexDirection: "column",

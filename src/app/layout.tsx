@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "My App",
+  title: "SIMPEG BOLTARA",
   description: "Next.js App with Simple Sidebar",
 };
 
